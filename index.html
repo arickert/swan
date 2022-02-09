@@ -6,7 +6,9 @@
 
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">    
-        <title>Document</title>
+        <title>Swan</title>
+        <link rel="stylesheet" href="style.css">
+
     </head>
     <body style="background-color:#E4CEC9">
         <div class="container-fluid">
@@ -15,7 +17,47 @@
             width: 50%" class="img-fluid " src="swannies.gif">    </div>
     <div class="container-fluid">
 
-        <audio style="margin-left:35%;  width:30%"  controls src="02 - Porcupine.mp3"></audio>
+        <audio style="margin-left:35%;  width:30%"  controls src="porc.mp3"></audio>
+
+        <section>
+
+            <div style="width: 50px; height: 50px;"></div>
+            <div class="audio-player" style="margin: 0 auto">
+              <div class="timeline">
+                <div class="progress"></div>
+              </div>
+              <div class="controls">
+                <div class="play-container">
+                  <div class="toggle-play play">
+                </div>
+                </div>
+                <div class="time">
+                  <div class="current">0:00</div>
+                  <div class="divider">/</div>
+                  <div class="length"></div>
+                </div>
+                <div class="name">Music Song</div>
+                <div class="volume-container">
+                  <div class="volume-button">
+                    <div class="volume icono-volumeMedium"></div>
+                  </div>
+                  
+                  <div class="volume-slider">
+                    <div class="volume-percentage"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- partial -->
+                    
+              <script  src="player.js"></script>
+                       
+                        </div>
+                    </div>
+                </div>
+            </section>
+                 
+
         </div>
     </body>
 </html>
