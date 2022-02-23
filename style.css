@@ -10,7 +10,7 @@
 
 .audio-player {
   height: 50px;
-  width: 370px;
+  width: 350px;
   background: #E4CEC9;
   font-family: arial;
   color: white;
@@ -126,7 +126,7 @@
 
 @media (max-width: 768px) {
   :root {
-    --size-divisor: 370px;
+    --size-divisor: 350px;
   }
 }
 @media (min-width: 767px) { 
