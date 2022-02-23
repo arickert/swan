@@ -10,7 +10,7 @@
 
 .audio-player {
   height: 50px;
-  width: 350px;
+  width: 370px;
   background: #E4CEC9;
   font-family: arial;
   color: white;
@@ -118,4 +118,23 @@
 .audio-player .controls .volume-container:hover .volume-slider {
   left: -123px;
   width: 120px;
+}
+
+:root {
+  --size-divisor: 3;
+}
+
+@media (max-width: 768px) {
+  :root {
+    --size-divisor: 370px;
+  }
+}
+@media (min-width: 767px) { 
+  :root {
+    --size-divisor: 50%;
+  }
+}
+
+#swangif{
+  width: var(--size-divisor);
 }
