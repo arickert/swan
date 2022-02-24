@@ -6,7 +6,7 @@
 
 const audioPlayer = document.querySelector(".audio-player");
 const audio = new Audio(
-  "porc.mp3"
+  "porc.wav"
 );
 //credit for song: Adrian kreativaweb@gmail.com
 
