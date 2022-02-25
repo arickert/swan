@@ -70,7 +70,7 @@
         </iframe>
         <div style="  display: flex;
         justify-content: center;
-        align-items: center; height:140px; padding-top:20px; font-size:4em; color: #435e75" class="container-fluid">SWAN FM</div>
+        align-items: center; height:140px; padding-top:20px; font-size:4em; color: #435e75" class="container-fluid" id="swantitle">SWAN FM</div>
         <div class="container-fluid">
             <div id="swangif" style="margin:0 auto">
             <img style="width:100%;" class="imgfluid" src="swannies.gif">    </div>
@@ -113,6 +113,16 @@
 // - Be able to grab a custom title instead of "Music Song"
 // - Hover over sliders to see preview of timestamp/volume change
 
+const stitle = document.querySelector("#swantitle");
+stitle.addEventListener("click",
+  () => {
+    console.log("hi");
+    changesong();
+  },
+  false
+);
+
+
 const audioPlayer = document.querySelector(".audio-player");
 const audio = new Audio(
   "porc.wav"
@@ -150,10 +160,12 @@ volumeSlider.addEventListener('click', e => {
   audioPlayer.querySelector(".controls .volume-percentage").style.width = newVolume * 100 + '%';
 }, false)
 
+
 //check audio percentage and update time accordingly
 setInterval(() => {
   var widgetIframe = document.getElementById('sc-widget'),
   widget       = SC.Widget(widgetIframe);
+
   widget.getDuration(getdur);
   // widget.getPosition(getpos);
   // console.log(dur);
@@ -193,6 +205,11 @@ playBtn.addEventListener(
   },
   false
 );
+
+function changesong(){
+  var widgetIframe = document.getElementById('sc-widget');
+  widgetIframe.src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/228144595&color=%23ff5500&auto_play=true&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&visual=false";
+}
 
 function playorpause(boolean){
   console.log(boolean);
