@@ -54,18 +54,30 @@ const playBtn = audioPlayer.querySelector(".controls .toggle-play");
 playBtn.addEventListener(
   "click",
   () => {
-    if (audio.paused) {
-      playBtn.classList.remove("play");
-      playBtn.classList.add("pause");
-      audio.play();
-    } else {
-      playBtn.classList.remove("pause");
-      playBtn.classList.add("play");
-      audio.pause();
-    }
+    console.log("hi");
+
+    var widgetIframe = document.getElementById('sc-widget'),
+    widget       = SC.Widget(widgetIframe);
+    console.log("hi");
+    widget.isPaused(playorpause);
   },
   false
 );
+
+function playorpause(boolean){
+  console.log(boolean);
+  var widgetIframe = document.getElementById('sc-widget'),
+  widget       = SC.Widget(widgetIframe);
+if (widget.isPaused()) {
+      playBtn.classList.remove("play");
+      playBtn.classList.add("pause");
+      widget.play();
+    } else {
+      playBtn.classList.remove("pause");
+      playBtn.classList.add("play");
+      widget.pause();
+    }
+}
 
 audioPlayer.querySelector(".volume-button").addEventListener("click", () => {
   const volumeEl = audioPlayer.querySelector(".volume-container .volume");
