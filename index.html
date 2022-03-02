@@ -89,12 +89,14 @@
                 <div class="time">
                   <div class="current">0:00</div>
                   <div class="divider">/</div>
-                  <div class="length"></div>
+                  <div class="length">1:28</div>
                 </div>
-                <div class="name">February 9, 2022: Symposium Mix JackDelay</div>
+                <div class="name">Fork In My Neck (tribute to d. bro)</div>
                 <div class="volume-container">
                   <div class="volume-button">
-                    <div class="volume icono-volumeMedium"></div>
+                    <div class="volume icono-volumeMedium">
+                      <img src="volume-up.svg"> 
+                    </div>
                   </div>
                   
                   <div class="volume-slider">
@@ -131,33 +133,46 @@ const audio = new Audio(
 
 console.dir(audio);
 
-audio.addEventListener(
-  "loadeddata",
-  () => {
-    audioPlayer.querySelector(".time .length").textContent = getTimeCodeFromNum(
-      audio.duration
-    );
-    audio.volume = .75;
-  },
-  false
-);
+// audio.addEventListener(
+//   "loadeddata",
+//   () => {
+//     audioPlayer.querySelector(".time .length").textContent = getTimeCodeFromNum(
+//       audio.duration
+//     );
+//     audio.volume = .75;
+//   },
+//   false
+// );
 
 //click on timeline to skip around
 const timeline = audioPlayer.querySelector(".timeline");
 timeline.addEventListener("click", e => {
-  const timelineWidth = window.getComputedStyle(timeline).width;
-  const timeToSeek = e.offsetX / parseInt(timelineWidth) * audio.duration;
-  audio.currentTime = timeToSeek;
+  var widgetIframe = document.getElementById('sc-widget'),
+  widget       = SC.Widget(widgetIframe);
+  widget.getDuration((d)=>setTimeline(d, e));
+  
 }, false);
+
+function setTimeline(duration,e){
+  console.log(duration);
+  const timelineWidth = window.getComputedStyle(timeline).width;
+  const timeToSeek = e.offsetX / parseInt(timelineWidth) * duration;
+  var widgetIframe = document.getElementById('sc-widget'),
+  widget       = SC.Widget(widgetIframe);
+  widget.seekTo(timeToSeek);
+}
 
 //click volume slider to change volume
 const volumeSlider = audioPlayer.querySelector(".controls .volume-slider");
 volumeSlider.addEventListener('click', e => {
   const sliderWidth = window.getComputedStyle(volumeSlider).width;
   
-  const newVolume = e.offsetX / parseInt(sliderWidth);
-  audio.volume = newVolume;
-  audioPlayer.querySelector(".controls .volume-percentage").style.width = newVolume * 100 + '%';
+  const newVolume = e.offsetX * 100 / parseInt(sliderWidth);
+  var widgetIframe = document.getElementById('sc-widget');
+  widget= SC.Widget(widgetIframe);
+  widget.getVolume((v)=>{console.log(v)});
+  widget.setVolume(newVolume);
+  audioPlayer.querySelector(".controls .volume-percentage").style.width = newVolume + '%';
 }, false)
 
 
@@ -165,28 +180,41 @@ volumeSlider.addEventListener('click', e => {
 setInterval(() => {
   var widgetIframe = document.getElementById('sc-widget'),
   widget       = SC.Widget(widgetIframe);
-
+  widget.getCurrentSound((s)=>{
+    audioPlayer.querySelector(".name").textContent = s.title})
   widget.getDuration(getdur);
+  widget.isPaused(playpausecheck);
   // widget.getPosition(getpos);
   // console.log(dur);
   // console.log(pos);
-  audioPlayer.querySelector(".time .current").textContent = getTimeCodeFromNum(
-    audio.currentTime
-  );
 }, 10);
 
+function playpausecheck(boolean){
+  //SC.Widget.Events.READY
+  if (!boolean) {
+      playBtn.classList.remove("play");
+      playBtn.classList.add("pause");
+    } else {
+      playBtn.classList.remove("pause");
+      playBtn.classList.add("play");
+    }
+}
+
 function getdur(dur){
-  console.log(dur)
   var widgetIframe = document.getElementById('sc-widget'),
   widget       = SC.Widget(widgetIframe);
   widget.getPosition((pos)=>getpos(pos,dur));
+  audioPlayer.querySelector(".time .length").textContent = getTimeCodeFromNum(
+    dur
+  );
   // return num;
 }
 function getpos(num1, num2){
-  console.log(num1);
-  console.log(num2);
   const progressBar = audioPlayer.querySelector(".progress");
   progressBar.style.width = num1 / num2 * 100 + "%";
+  audioPlayer.querySelector(".time .current").textContent = getTimeCodeFromNum(
+    num1
+  );
 
   // return num;
 }
@@ -196,11 +224,8 @@ const playBtn = audioPlayer.querySelector(".controls .toggle-play");
 playBtn.addEventListener(
   "click",
   () => {
-    console.log("hi");
-
     var widgetIframe = document.getElementById('sc-widget'),
     widget       = SC.Widget(widgetIframe);
-    console.log("hi");
     widget.isPaused(playorpause);
   },
   false
@@ -209,6 +234,7 @@ playBtn.addEventListener(
 function changesong(){
   var widgetIframe = document.getElementById('sc-widget');
   widgetIframe.src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/228144595&color=%23ff5500&auto_play=true&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&visual=false";
+
 }
 
 function playorpause(boolean){
@@ -240,6 +266,7 @@ audioPlayer.querySelector(".volume-button").addEventListener("click", () => {
 
 //turn 128 seconds into 2:08
 function getTimeCodeFromNum(num) {
+  num = num/1000;
   let seconds = parseInt(num);
   let minutes = parseInt(seconds / 60);
   seconds -= minutes * 60;
