@@ -32,7 +32,7 @@
         <link rel="stylesheet" href="style.css">
 
     </head>
-    <body>
+    <body style="background-color:#E4CEC9;">
 <!-- 
       <!doctype html>
       <html>
@@ -107,28 +107,141 @@
               </div>
             </div>
             <!-- partial -->
-            <script src="https://w.soundcloud.com/player/api.js" type="text/javascript"></script>
+                       
+              </div>
 
-              <script type="text/javascript" >
+           
+</div>
+
+            </div>
+            <div style="position:relative; left:20px; pointer-events:none">
+              <div style="pointer-events: all; cursor: pointer; width:fit-content" id="swantitle1"> 
+              Archive
+              adsfdsa
+              dsafdasf
+              asdfdsfadsz
+              Archive
+              adsfdsa
+              dsafdasf
+              asdfdsfads
+            </div>
+              <br>
+              <div style="pointer-events: all; cursor: pointer; width:fit-content" id="swantitle"> 
+                Archive
+                adsfdsa
+                dsafdasf
+                asdfdsfadsz
+                Archive
+                adsfdsa
+                dsafdasf
+                asdfdsfads
+              </div>
+              <br>
+
+              <br>
+
+              <br>
+
+              <br>
+
+              <br>
+
+              <br>
+              <div style="pointer-events: all; cursor: pointer; width:fit-content" id="swantitle"> 
+                Archive
+                adsfdsa
+                dsafdasf
+                asdfdsfadsz
+                Archive
+                adsfdsa
+                dsafdasf
+                asdfdsfads
+              </div>
+              <div style="pointer-events: all; cursor: pointer; width:fit-content" id="swantitle"> 
+                Archive
+                adsfdsa
+                dsafdasf
+                asdfdsfadsz
+                Archive
+                adsfdsa
+                dsafdasf
+                asdfdsfads
+              </div>
+              <div style="pointer-events: all; cursor: pointer; width:fit-content" id="swantitle"> 
+                Archive
+                adsfdsa
+                dsafdasf
+                asdfdsfadsz
+                Archive
+                adsfdsa
+                dsafdasf
+                asdfdsfads
+              </div>
+              <div style="pointer-events: all; cursor: pointer; width:fit-content" id="swantitle"> 
+                Archive
+                adsfdsa
+                dsafdasf
+                asdfdsfadsz
+                Archive
+                adsfdsa
+                dsafdasf
+                asdfdsfads
+              </div>
+              <br>
+
+              <br>
+
+              <br>
+
+              <br>
+
+              <br>
+
+              <br>
+              <br>
+              adsfdsa
+              adsfasfd
+              fdafas
+              adsfdsa
+              adsfasfd
+              fdafas
+              <br>
+
+              <br>
+
+              <br>
+
+              <br>
+
+              <br>
+
+              <br>
+            </div>
+
+
+      </div>
+      <script src="https://w.soundcloud.com/player/api.js" type="text/javascript"></script>
+
+      <script type="text/javascript" >
 // Possible improvements:
 // - Change timeline and volume slider into input sliders, reskinned
 // - Change into Vue or React component
 // - Be able to grab a custom title instead of "Music Song"
 // - Hover over sliders to see preview of timestamp/volume change
 
-const stitle = document.querySelector("#swantitle");
+const stitle = document.querySelector("#swantitle1");
 stitle.addEventListener("click",
-  () => {
-    console.log("hi");
-    changesong();
-  },
-  false
+() => {
+console.log("hi");
+changesong();
+},
+false
 );
 
 
 const audioPlayer = document.querySelector(".audio-player");
 const audio = new Audio(
-  "porc.wav"
+"porc.wav"
 );
 //credit for song: Adrian kreativaweb@gmail.com
 
@@ -148,249 +261,138 @@ console.dir(audio);
 //click on timeline to skip around
 const timeline = audioPlayer.querySelector(".timeline");
 timeline.addEventListener("click", e => {
-  var widgetIframe = document.getElementById('sc-widget'),
-  widget       = SC.Widget(widgetIframe);
-  widget.getDuration((d)=>setTimeline(d, e));
-  
+var widgetIframe = document.getElementById('sc-widget'),
+widget       = SC.Widget(widgetIframe);
+widget.getDuration((d)=>setTimeline(d, e));
+
 }, false);
 
 function setTimeline(duration,e){
-  console.log(duration);
-  const timelineWidth = window.getComputedStyle(timeline).width;
-  const timeToSeek = e.offsetX / parseInt(timelineWidth) * duration;
-  var widgetIframe = document.getElementById('sc-widget'),
-  widget       = SC.Widget(widgetIframe);
-  widget.seekTo(timeToSeek);
+console.log(duration);
+const timelineWidth = window.getComputedStyle(timeline).width;
+const timeToSeek = e.offsetX / parseInt(timelineWidth) * duration;
+var widgetIframe = document.getElementById('sc-widget'),
+widget       = SC.Widget(widgetIframe);
+widget.seekTo(timeToSeek);
 }
 
 //click volume slider to change volume
 const volumeSlider = audioPlayer.querySelector(".controls .volume-slider");
 volumeSlider.addEventListener('click', e => {
-  const sliderWidth = window.getComputedStyle(volumeSlider).width;
-  
-  const newVolume = e.offsetX * 100 / parseInt(sliderWidth);
-  var widgetIframe = document.getElementById('sc-widget');
-  widget= SC.Widget(widgetIframe);
-  widget.getVolume((v)=>{console.log(v)});
-  widget.setVolume(newVolume);
-  audioPlayer.querySelector(".controls .volume-percentage").style.width = newVolume + '%';
+const sliderWidth = window.getComputedStyle(volumeSlider).width;
+
+const newVolume = e.offsetX * 100 / parseInt(sliderWidth);
+var widgetIframe = document.getElementById('sc-widget');
+widget= SC.Widget(widgetIframe);
+widget.getVolume((v)=>{console.log(v)});
+widget.setVolume(newVolume);
+audioPlayer.querySelector(".controls .volume-percentage").style.width = newVolume + '%';
 }, false)
 
 
 //check audio percentage and update time accordingly
 setInterval(() => {
-  var widgetIframe = document.getElementById('sc-widget'),
-  widget       = SC.Widget(widgetIframe);
-  widget.getCurrentSound((s)=>{
-    audioPlayer.querySelector(".name").textContent = s.title})
-  widget.getDuration(getdur);
-  widget.isPaused(playpausecheck);
-  // widget.getPosition(getpos);
-  // console.log(dur);
-  // console.log(pos);
+var widgetIframe = document.getElementById('sc-widget'),
+widget       = SC.Widget(widgetIframe);
+widget.getCurrentSound((s)=>{
+audioPlayer.querySelector(".name").textContent = s.title})
+widget.getDuration(getdur);
+widget.isPaused(playpausecheck);
+// widget.getPosition(getpos);
+// console.log(dur);
+// console.log(pos);
 }, 10);
 
 function playpausecheck(boolean){
-  //SC.Widget.Events.READY
-  if (!boolean) {
-      playBtn.classList.remove("play");
-      playBtn.classList.add("pause");
-    } else {
-      playBtn.classList.remove("pause");
-      playBtn.classList.add("play");
-    }
+//SC.Widget.Events.READY
+if (!boolean) {
+playBtn.classList.remove("play");
+playBtn.classList.add("pause");
+} else {
+playBtn.classList.remove("pause");
+playBtn.classList.add("play");
+}
 }
 
 function getdur(dur){
-  var widgetIframe = document.getElementById('sc-widget'),
-  widget       = SC.Widget(widgetIframe);
-  widget.getPosition((pos)=>getpos(pos,dur));
-  audioPlayer.querySelector(".time .length").textContent = getTimeCodeFromNum(
-    dur
-  );
-  // return num;
+var widgetIframe = document.getElementById('sc-widget'),
+widget       = SC.Widget(widgetIframe);
+widget.getPosition((pos)=>getpos(pos,dur));
+audioPlayer.querySelector(".time .length").textContent = getTimeCodeFromNum(
+dur
+);
+// return num;
 }
 function getpos(num1, num2){
-  const progressBar = audioPlayer.querySelector(".progress");
-  progressBar.style.width = num1 / num2 * 100 + "%";
-  audioPlayer.querySelector(".time .current").textContent = getTimeCodeFromNum(
-    num1
-  );
+const progressBar = audioPlayer.querySelector(".progress");
+progressBar.style.width = num1 / num2 * 100 + "%";
+audioPlayer.querySelector(".time .current").textContent = getTimeCodeFromNum(
+num1
+);
 
-  // return num;
+// return num;
 }
 
 //toggle between playing and pausing on button click
 const playBtn = audioPlayer.querySelector(".controls .toggle-play");
 playBtn.addEventListener(
-  "click",
-  () => {
-    var widgetIframe = document.getElementById('sc-widget'),
-    widget       = SC.Widget(widgetIframe);
-    widget.isPaused(playorpause);
-  },
-  false
+"click",
+() => {
+var widgetIframe = document.getElementById('sc-widget'),
+widget       = SC.Widget(widgetIframe);
+widget.isPaused(playorpause);
+},
+false
 );
 
 function changesong(){
-  var widgetIframe = document.getElementById('sc-widget');
-  widgetIframe.src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/228144595&color=%23ff5500&auto_play=true&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&visual=false";
+var widgetIframe = document.getElementById('sc-widget');
+widgetIframe.src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/228144595&color=%23ff5500&auto_play=true&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&visual=false";
 
 }
 
 function playorpause(boolean){
-  console.log(boolean);
-  var widgetIframe = document.getElementById('sc-widget'),
-  widget       = SC.Widget(widgetIframe);
-  if (boolean) {
-      playBtn.classList.remove("play");
-      playBtn.classList.add("pause");
-      widget.play();
-    } else {
-      playBtn.classList.remove("pause");
-      playBtn.classList.add("play");
-      widget.pause();
-    }
+console.log(boolean);
+var widgetIframe = document.getElementById('sc-widget'),
+widget       = SC.Widget(widgetIframe);
+if (boolean) {
+playBtn.classList.remove("play");
+playBtn.classList.add("pause");
+widget.play();
+} else {
+playBtn.classList.remove("pause");
+playBtn.classList.add("play");
+widget.pause();
+}
 }
 
 audioPlayer.querySelector(".volume-button").addEventListener("click", () => {
-  const volumeEl = audioPlayer.querySelector(".volume-container .volume");
-  audio.muted = !audio.muted;
-  if (audio.muted) {
-    volumeEl.classList.remove("icono-volumeMedium");
-    volumeEl.classList.add("icono-volumeMute");
-  } else {
-    volumeEl.classList.add("icono-volumeMedium");
-    volumeEl.classList.remove("icono-volumeMute");
-  }
+const volumeEl = audioPlayer.querySelector(".volume-container .volume");
+audio.muted = !audio.muted;
+if (audio.muted) {
+volumeEl.classList.remove("icono-volumeMedium");
+volumeEl.classList.add("icono-volumeMute");
+} else {
+volumeEl.classList.add("icono-volumeMedium");
+volumeEl.classList.remove("icono-volumeMute");
+}
 });
 
 //turn 128 seconds into 2:08
 function getTimeCodeFromNum(num) {
-  num = num/1000;
-  let seconds = parseInt(num);
-  let minutes = parseInt(seconds / 60);
-  seconds -= minutes * 60;
-  const hours = parseInt(minutes / 60);
-  minutes -= hours * 60;
+num = num/1000;
+let seconds = parseInt(num);
+let minutes = parseInt(seconds / 60);
+seconds -= minutes * 60;
+const hours = parseInt(minutes / 60);
+minutes -= hours * 60;
 
-  if (hours === 0) return `${minutes}:${String(seconds % 60).padStart(2, 0)}`;
-  return `${String(hours).padStart(2, 0)}:${minutes}:${String(
-    seconds % 60
-  ).padStart(2, 0)}`;
+if (hours === 0) return `${minutes}:${String(seconds % 60).padStart(2, 0)}`;
+return `${String(hours).padStart(2, 0)}:${minutes}:${String(
+seconds % 60
+).padStart(2, 0)}`;
 }
-              </script>
-                       
-              </div>
-
-           
-</div>
-
-            </div>
-            <div style="position:relative; left:10px; pointer-events:none">
-              <div style="pointer-events: all; width:fit-content"> 
-              Archive
-              adsfdsa
-              dsafdasf
-              asdfdsfads
-              Archive
-              adsfdsa
-              dsafdasf
-              asdfdsfads
-            </div>
-              <br>
-              adsfdsa
-              adsfasfd
-              fdafas
-              Archive
-              adsfdsa
-              dsafdasf
-              asdfdsfads
-              Archive
-              adsfdsa
-              dsafdasf
-              asdfdsfads
-              Archive
-              adsfdsa
-              dsafdasf
-              asdfdsfads
-              Archive
-              adsfdsa
-              dsafdasf
-              asdfdsfads
-              <br>
-
-              <br>
-
-              <br>
-
-              <br>
-
-              <br>
-
-              <br>
-              adsfdsa
-              adsfasfd
-              fdafas
-              adsfdsa
-              adsfasfd
-              fdafas
-              Archive
-              adsfdsa
-              dsafdasf
-              asdfdsfads
-              Archive
-              adsfdsa
-              dsafdasf
-              asdfdsfads
-              Archive
-              adsfdsa
-              dsafdasf
-              asdfdsfads
-              Archive
-              adsfdsa
-              dsafdasf
-              asdfdsfads
-              Archive
-              adsfdsa
-              dsafdasf
-              asdfdsfads
-              Archive
-              adsfdsa
-              dsafdasf
-              asdfdsfads
-              <br>
-
-              <br>
-
-              <br>
-
-              <br>
-
-              <br>
-
-              <br>
-              <br>
-              adsfdsa
-              adsfasfd
-              fdafas
-              adsfdsa
-              adsfasfd
-              fdafas
-              <br>
-
-              <br>
-
-              <br>
-
-              <br>
-
-              <br>
-
-              <br>
-            </div>
-
-      </div>
+      </script>
     </div>
     </body>
 </html> 
